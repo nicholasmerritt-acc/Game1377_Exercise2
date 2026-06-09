@@ -38,7 +38,23 @@ public class MonsterBrawl : MonoBehaviour
         int[] healthStats = { 30, 80, 200, 50, 250 };
         int[] speedStats = { 1, 2, 3, 1, 4 };
 
-        // YOUR CODE GOES HERE
+/*
+outer 2 loops go through monsters
+i from 1 to length
+j from i + 1 to length so we don't double fight
+if i == j skip
+
+inner loop goes turn by turn
+check speed and skip attack
+change hp
+check end
+if end, we are done with this fight. break inner loop
+*/
+
+
+
+
+
     }
 }
 
