@@ -43,29 +43,23 @@ public class MonsterBrawl : MonoBehaviour
         //Print the roster
         //1.Loop through the monsters and print each one in this exact format:
         //Goblin | ATK: 8 | HP: 30 | SPD: 1
-        for (int i = 0; i < monsterNames.Length; i++)
+        for (int i = 0; i < numMonsters; i++)
         {
             Debug.Log($"{monsterNames[i]} | ATK: {attackStats[i]} | HP: {healthStats[i]} | SPD: {speedStats[i]}");
         }
 
-        //outer 2 loops go through monsters
-        //i from 1 to length
-        for (int i = 0; i < numMonsters - 1; i++)
+        //outer monster iterates from 1 to length - 1, since the last monster will be the "opponent" or "inner" monster every time
+        for (int outer = 0; outer < numMonsters - 1; outer++)
         {
-            //Debug.Log($"outer monster is: {monsterNames[i]}");
 
             //inner loop is opponent
-            //j from i + 1 to length so we don't double fight
-            for (int j = i + 1; j < numMonsters; j++)
+            //inner from outer + 1 to length. since outer is always > inner this ensures we don't fight ourself
+            for (int inner = outer + 1; inner < numMonsters; inner++)
             {
-                //Debug.Log($"inner monster is: {monsterNames[j]}");
-                //Debug.Log($"{monsterNames[i]} fighting {monsterNames[j]}");
-
-                int outerMonsterHealth = healthStats[i];
-                int innerMonsterHealth = healthStats[j];
+                int outerMonsterHealth = healthStats[outer];
+                int innerMonsterHealth = healthStats[inner];
 
                 int turn = 0;
-
                 //while monsters are not dead, fight turn by turn.
                 while (outerMonsterHealth > 0 && innerMonsterHealth > 0) {
 
@@ -74,25 +68,20 @@ public class MonsterBrawl : MonoBehaviour
                     //if turn num mod speed is 0, then do attack
 
                     //outer monster attacks
-                    if (turn % speedStats[i] == 0)
+                    if (turn % speedStats[outer] == 0)
                     {
-                        //Debug.Log($"{monsterNames[i]} is attacking");
-                        innerMonsterHealth -= attackStats[i];
+                        innerMonsterHealth -= attackStats[outer];
                     }
                     //inner monster attacks
-                    if (turn % speedStats[j] == 0)
+                    if (turn % speedStats[inner] == 0)
                     {
-                        //Debug.Log($"{monsterNames[j]} is attacking");
-                        outerMonsterHealth -= attackStats[j];
+                        outerMonsterHealth -= attackStats[inner];
                     }
-
-                    //Debug.Log($"healths are now: {outerMonsterHealth} and {innerMonsterHealth}");
-
                 }
 
                 //we exited the loop, at least one monster must be dead
                 //prepare result string
-                string fighters = $"{monsterNames[i]} vs {monsterNames[j]}";
+                string fighters = $"{monsterNames[outer]} vs {monsterNames[inner]}";
 
                 //if both dead, draw
                 if (outerMonsterHealth <= 0 && innerMonsterHealth <= 0)
@@ -107,11 +96,11 @@ public class MonsterBrawl : MonoBehaviour
                     int winnerHealth;
                     if (outerMonsterHealth > innerMonsterHealth)
                     {
-                        winner = monsterNames[i];
+                        winner = monsterNames[outer];
                         winnerHealth = outerMonsterHealth;
                     } else
                     {
-                        winner = monsterNames[j];
+                        winner = monsterNames[inner];
                         winnerHealth = innerMonsterHealth;
                     }
 
