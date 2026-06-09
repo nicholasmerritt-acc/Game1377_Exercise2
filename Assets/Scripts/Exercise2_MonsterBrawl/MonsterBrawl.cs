@@ -38,18 +38,39 @@ public class MonsterBrawl : MonoBehaviour
         int[] healthStats = { 30, 80, 200, 50, 250 };
         int[] speedStats = { 1, 2, 3, 1, 4 };
 
-/*
-outer 2 loops go through monsters
-i from 1 to length
-j from i + 1 to length so we don't double fight
-if i == j skip
+        int numMonsters = monsterNames.Length;
 
-inner loop goes turn by turn
-check speed and skip attack
-change hp
-check end
-if end, we are done with this fight. break inner loop
-*/
+        //Print the roster
+        //1.Loop through the monsters and print each one in this exact format:
+        //Goblin | ATK: 8 | HP: 30 | SPD: 1
+        for (int i = 0; i < monsterNames.Length; i++)
+        {
+            Debug.Log($"{monsterNames[i]} | ATK: {attackStats[i]} | HP: {healthStats[i]} | SPD: {speedStats}");
+        }
+
+        //outer 2 loops go through monsters
+        //i from 1 to length
+        for (int i = 0; i < numMonsters - 1; i++)
+        {
+            Debug.Log($"outer monster is: {monsterNames[i]}");
+
+            //inner loop is opponent
+            //j from i + 1 to length so we don't double fight
+            for (int j = i + 1; j < numMonsters; j++)
+            {
+                Debug.Log($"inner monster is: {monsterNames[j]}");
+
+                //while monsters are not dead:
+                {
+                    //if turn num mod speed = 0, then do attack
+
+                    //if we are doing attack, decrease other monster's health
+
+                    //check if monsters are dead and break?
+                    //and print result
+                }
+            }
+        }
 
 
 
